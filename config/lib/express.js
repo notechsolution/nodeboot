@@ -245,7 +245,7 @@ module.exports.init = function (db) {
   this.initHelmetHeaders(app);
 
   // Initialize modules static client routes, before session!
-  this.initModulesClientRoutes(app);
+  // this.initModulesClientRoutes(app);
 
   // Initialize Express session
   this.initSession(app, db);

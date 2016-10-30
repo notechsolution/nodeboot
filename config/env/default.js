@@ -82,7 +82,7 @@ module.exports = {
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
     env: {
-      NODE_ENV: '"'+process.env.NODE_ENV?process.env.NODE_ENV:"development"+'"'
+      NODE_ENV: '"'+(process.env.NODE_ENV?process.env.NODE_ENV:'development')+'"'
     }
   }
 
