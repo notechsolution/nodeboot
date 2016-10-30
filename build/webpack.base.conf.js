@@ -1,5 +1,5 @@
 var path = require('path')
-var config = require('../config')
+var config = require('../config/config').webpack
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
 
@@ -8,8 +8,8 @@ module.exports = {
     app: './client/main.js'
   },
   output: {
-    path: config.build.assetsRoot,
-    publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
+    path: config.assetsRoot,
+    publicPath: process.env.NODE_ENV === 'production' ? config.assetsPublicPath : config.assetsPublicPath,
     filename: '[name].js'
   },
   resolve: {

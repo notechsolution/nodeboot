@@ -9,6 +9,7 @@ var validator = require('validator'),
  */
 exports.renderIndex = function (req, res) {
   var safeUserObject = null;
+  console.log('enter index file request');
   if (req.user) {
     safeUserObject = {
       displayName: validator.escape(req.user.displayName),
@@ -24,7 +25,7 @@ exports.renderIndex = function (req, res) {
     };
   }
 
-  res.render('modules/core/server/views/index', {
+  res.render('server/core/views/index', {
     user: JSON.stringify(safeUserObject),
     sharedConfig: JSON.stringify(config.shared)
   });
