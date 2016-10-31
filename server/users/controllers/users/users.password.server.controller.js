@@ -5,7 +5,7 @@
  */
 var path = require('path'),
   config = require(path.resolve('./config/config')),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  errorHandler = require(path.resolve('./server/core/controllers/errors.server.controller')),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   nodemailer = require('nodemailer'),
