@@ -8,6 +8,9 @@
 # install dependencies
 npm install
 
+# if your network has limitation on npm.org, you may change the npm registry to your nearby vendor. e.g.
+npm config set registry https://registry.npm.taobao.org/
+
 # serve with hot reload at localhost:8080
 npm run dev
 
