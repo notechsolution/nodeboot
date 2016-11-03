@@ -6,7 +6,6 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "dev-1": "set NODE_ENV=development&node build/dev-server-1.js",
     "build": "node build/build.js",
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
