@@ -99,7 +99,8 @@ module.exports.initViewEngine = function (app) {
     extname: '.server.view.html'
   }));
   app.set('view engine', 'server.view.html');
-  app.set('views', path.resolve('./'));
+  var viewPath = path.posix.join(config.webpack.assetsPublicPath, config.webpack.assetsViewDirectory)
+  app.set('views', path.resolve(viewPath));
 };
 
 /**

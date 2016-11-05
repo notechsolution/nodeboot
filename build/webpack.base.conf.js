@@ -4,9 +4,6 @@ var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
-  entry: {
-    app: './client/entries/index.js'
-  },
   output: {
     path: config.assetsRoot,
     publicPath: process.env.NODE_ENV === 'production' ? config.assetsPublicPath : config.assetsPublicPath,

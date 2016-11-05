@@ -1,11 +1,29 @@
+// https://github.com/shelljs/shelljs
+require('shelljs/global')
 var webpack = require('webpack')
-var webpackConfig = process.env.NODE_ENV === 'development'
-  ? require('./webpack.dev.conf')
-  : require('./webpack.prod.conf')
+var config = require('../config/config')
+var path = require('path')
+
 
 module.exports.package = function(app,callback){
+  var entries = config.utils.getGlobbedPaths(config.files.client.entries);
 
-// Define HTTP proxies to your custom API backend
+  var assetsPath = path.join(config.webpack.assetsRoot, config.webpack.assetsSubDirectory)
+  var viewPath = path.join(config.webpack.assetsRoot, config.webpack.assetsViewDirectory)
+  rm('-rf', assetsPath)
+  mkdir('-p', assetsPath)
+  mkdir('-p', viewPath)
+  cp('-R', 'static/', assetsPath)
+  cp('-R', 'server/**/views/', viewPath)
+
+  // entries.each(function(entry){
+  //
+  // })
+
+  var webpackConfig = process.env.NODE_ENV === 'development'
+    ? require('./webpack.dev.conf')(entries)
+    : require('./webpack.prod.conf')(entries)
+
   var compiler = webpack(webpackConfig)
 
   var devMiddleware = require('webpack-dev-middleware')(compiler, {
