@@ -65,7 +65,7 @@ module.exports = {
     }
   },
   webpack: {
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve('dist'),
     assetsSubDirectory: 'static',
     assetsViewDirectory: 'views',
     assetsPublicPath: '/dist/',
