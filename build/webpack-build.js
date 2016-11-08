@@ -6,29 +6,10 @@ var path = require('path')
 
 
 module.exports.package = function(app,callback){
+
   var entries = config.utils.getGlobbedPaths(config.files.client.entries);
-
-  var assetsPath = path.join(config.webpack.assetsRoot, config.webpack.assetsSubDirectory)
-  var viewPath = path.join(config.webpack.assetsRoot, config.webpack.assetsViewDirectory)
-  rm('-rf', assetsPath)
-  mkdir('-p', assetsPath)
-  mkdir('-p', viewPath)
-  console.log('assertsPath:'+assetsPath)
-  console.log('viewPath:'+viewPath)
-  cp('-R', 'static/', assetsPath)
-  var folders = ls('-d','server/*')
-  console.log(folders)
-  folders.forEach(function(folder){
-    if (test('-d', folder+'/views/')){
-      var dest = viewPath+'/'+folder+'/views';
-      mkdir('-p', dest);
-      cp('-Rf', folder+'/views/', dest)
-    }
-
-  });
-
-
-  // entries.each(function(entry){
+  initDistFolder(entries);
+  // entries.forEach(function(entry){
   //
   // })
 
@@ -63,4 +44,28 @@ module.exports.package = function(app,callback){
 //   app.use(hotMiddleware)
 
 
+}
+
+var initDistFolder = function(entries){
+  var assetsPath = path.join(config.webpack.assetsRoot, config.webpack.assetsSubDirectory)
+  var viewPath = path.join(config.webpack.assetsRoot, config.webpack.assetsViewDirectory)
+  //clear dist folder
+  rm('-rf', config.webpack.assetsRoot)
+
+  //prepare view and static folder
+  mkdir('-p', assetsPath)
+  mkdir('-p', viewPath)
+
+  // copy static content into dist
+  cp('-R', 'static/', assetsPath)
+
+  //copy views from server folders
+  var folders = ls('-d','server/*')
+  folders.forEach(function(folder){
+    if (test('-d', folder+'/views/')){
+      var dest = viewPath+'/'+folder+'/views';
+      mkdir('-p', dest);
+      cp('-Rf', folder+'/views/', dest)
+    }
+  });
 }
