@@ -19,17 +19,37 @@
       <a href="https://github.com/vuejs/vue-router/" target="_blank">vue-router</a> for routing and
       <a href="https://github.com/vuejs/vuex/" target="_blank">vuex</a> for state management.
     </p>
+    <br/>
+    <div id="fake-nav">
+      <a href="#register" @click="openLoginModal('register', $event)">Register</a>
+      <a href="#login" @click="openLoginModal('login', $event)">Login</a>
+    </div>
+    <Login v-bind:active="activeModal"></Login>
   </div>
 </template>
 
 <script>
 import Hello from './Hello'
-
+import Login from './user/Login'
 export default {
   components: {
-    Hello
+    Hello,
+    Login
+  },
+  data(){
+    return {
+      activeModal:null
+    }
+  },
+  methods: {
+    openLoginModal: function (which, e) {
+      console.log(JSON.stringify(which))
+      e.preventDefault();
+      this.activeModal = which;
+    }
   }
 }
+
 </script>
 
 <style>
