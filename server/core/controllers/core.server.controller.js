@@ -35,7 +35,7 @@ exports.renderIndex = function (req, res) {
  * Render the server error page
  */
 exports.renderServerError = function (req, res) {
-  res.status(500).render('modules/core/server/views/500', {
+  res.status(500).render('server/core/views/500', {
     error: 'Oops! Something went wrong...'
   });
 };
@@ -48,7 +48,7 @@ exports.renderNotFound = function (req, res) {
 
   res.status(404).format({
     'text/html': function () {
-      res.render('modules/core/server/views/404', {
+      res.render('server/core/views/404', {
         url: req.originalUrl
       });
     },

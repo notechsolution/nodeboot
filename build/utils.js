@@ -1,9 +1,9 @@
 var path = require('path')
-var config = require('../config/config').webpack
+var config = require('../config/config')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 exports.assetsPath = function (_path) {
-  var assetsSubDirectory = config.assetsSubDirectory;
+  var assetsSubDirectory = config.webpack.assetsSubDirectory;
   return path.posix.join(assetsSubDirectory, _path)
 }
 
@@ -54,4 +54,15 @@ exports.styleLoaders = function (options) {
     })
   }
   return output
+}
+
+exports.getEntries = function(entriesPath){
+  var paths = config.utils.getGlobbedPaths(entriesPath);
+  var entries = {};
+  paths.forEach(function (pagePath) {
+    var entryName = pagePath.substring((pagePath.lastIndexOf("/")+1),pagePath.lastIndexOf("."));
+    entries[entryName] = "./"+pagePath;
+  });
+  console.log("entries | "+JSON.stringify(entries));
+  return entries;
 }
