@@ -11,7 +11,9 @@
       </ul>
       <div class="form-register" :class="{ 'active': active == 'register' }" id="form-register">
         <div class="error-message" v-text="registerError"></div>
-        <input type="text" name="name" placeholder="Name" v-model="registerName" @keyup.enter="submit('register', $event)">
+        <input type="text" name="name" placeholder="User ID" v-model="registerName" @keyup.enter="submit('register', $event)">
+        <input type="text" name="firstName" placeholder="First Name" v-model="registerFirstName" @keyup.enter="submit('register', $event)">
+        <input type="text" name="lastName" placeholder="Last Name" v-model="registerLastName" @keyup.enter="submit('register', $event)">
         <input type="email" name="email" placeholder="Email" v-model="registerEmail" @keyup.enter="submit('register', $event)">
         <input type="password" name="password" placeholder="Password" v-model="registerPassword" @keyup.enter="submit('register', $event)">
         <input type="submit" :class="{ 'disabled': submitted == 'register' }" @click="submit('register', $event)" v-model="registerSubmit" id="registerSubmit">
@@ -52,8 +54,10 @@
         loginSubmit: modal_submit_login,
 
         // Modal text fields
-        registerName: '20161017001',
-        registerEmail: '@qq.com',
+        registerName: '',
+        registerFirstName: '',
+        registerLastName: '',
+        registerEmail: '',
         registerPassword: '',
         loginUser: '',
         loginPassword: '',
@@ -87,23 +91,23 @@
         switch (which) {
           case 'register':
             data.username = this.registerName;
-            data.emailAddress = this.registerEmail;
+            data.firstName = this.registerFirstName;
+            data.lastName = this.registerLastName;
+            data.email = this.registerEmail;
             data.password = this.registerPassword;
             this.registerSubmit= 'Registering...';
             // GET /someUrl
                 this.$http.post('/api/auth/signup',data).then((response) => {
                   // success callback
-                  console.log('sucess signup');
                 this.active = null;
-                alert("success signup:"+JSON.stringify(response));
+                console.log("success signup:"+JSON.stringify(response));
             }, (response) => {
-              console.log('signup failed');
-              alert("signup failed due to :"+response);
+              console.log("signup failed due to :"+response);
             });
 
             break;
           case 'login':
-            data.emailAddress = this.loginUser;
+            data.email = this.loginUser;
             data.password = this.loginPassword;
             this.loginSubmit='Logging In...';
 
@@ -120,7 +124,7 @@
 
             break;
           case 'password':
-            data.emailAddress = this.passwordEmail;
+            data.email = this.passwordEmail;
             this.passwordSubmit, 'Resetting Password...'
             break;
         }
