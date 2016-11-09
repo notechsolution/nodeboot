@@ -23,7 +23,7 @@
       </div>
       <div class="form-login" :class="{ 'active': active == 'login' }" id="form-login">
         <div class="error-message" v-text="loginError"></div>
-        <input type="text" name="user" placeholder="Email or Username" v-model="loginUser" @keyup.enter="submit('login', $event)">
+        <input type="text" name="user" placeholder="Email or Username" v-model="loginUsernameOrEmail" @keyup.enter="submit('login', $event)">
         <input type="password" name="password" placeholder="Password" v-model="loginPassword" @keyup.enter="submit('login', $event)">
         <input type="submit" :class="{ 'disabled': submitted == 'login' }" @click="submit('login', $event)" v-model="loginSubmit" id="loginSubmit">
         <div class="links"> <a href="" @click="flip('password', $event)">Forgot your password?</a>
@@ -59,7 +59,7 @@
         registerLastName: '',
         registerEmail: '',
         registerPassword: '',
-        loginUser: '',
+        loginUsernameOrEmail: '',
         loginPassword: '',
         passwordEmail: '',
 
@@ -107,7 +107,7 @@
 
             break;
           case 'login':
-            data.email = this.loginUser;
+            data.usernameOrEmail = this.loginUsernameOrEmail;
             data.password = this.loginPassword;
             this.loginSubmit='Logging In...';
 
@@ -116,7 +116,7 @@
             // success callback
             console.log('sign in | sucess');
           this.active = null;
-          window.location = "/";
+          window.location = "/users";
         }, (response) => {
             console.log('failed sign in');
             alert("sign in | fail | :"+response);
