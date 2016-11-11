@@ -99,10 +99,12 @@
             // GET /someUrl
                 this.$http.post('/api/auth/signup',data).then((response) => {
                   // success callback
-                this.active = null;
+                this.active = 'login';
                 console.log("success signup:"+JSON.stringify(response));
+                this.registerSubmit= modal_submit_register;
             }, (response) => {
               console.log("signup failed due to :"+response);
+              this.registerSubmit= modal_submit_register;
             });
 
             break;
@@ -118,19 +120,24 @@
           this.active = null;
           window.location = "/users";
         }, (response) => {
-            console.log('failed sign in');
-            alert("sign in | fail | :"+response);
+            console.log('failed sign in |'+response);
+            this.loginSubmit= modal_submit_login;
           });
 
             break;
           case 'password':
             data.email = this.passwordEmail;
-            this.passwordSubmit, 'Resetting Password...'
+            this.passwordSubmit = 'Resetting Password...'
+            this.$http.post('/api/auth/forgot',data).then((response) => {
+                        // success callback
+                        console.log('reset password | success');
+                      this.active = 'login';
+                    }, (response) => {
+                        console.log('failed reset password |'+response);
+                        this.loginSubmit= modal_submit_password;
+                    });
             break;
         }
-        alert(JSON.stringify(data))
-        // TODO: submit our `data` variable
-
 
       }
     },

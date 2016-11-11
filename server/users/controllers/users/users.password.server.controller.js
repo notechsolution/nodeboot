@@ -62,7 +62,7 @@ exports.forgot = function (req, res, next) {
         httpTransport = 'https://';
       }
       var baseUrl = req.app.get('domain') || httpTransport + req.headers.host;
-      res.render(path.resolve('modules/users/server/templates/reset-password-email'), {
+      res.render(path.resolve('server/users/templates/reset-password-email'), {
         name: user.displayName,
         appName: config.app.title,
         url: baseUrl + '/api/auth/reset/' + token
