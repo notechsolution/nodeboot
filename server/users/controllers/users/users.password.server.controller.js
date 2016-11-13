@@ -13,7 +13,16 @@ var path = require('path'),
   crypto = require('crypto');
 
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
+smtpTransport.verify(function(error, success) {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Server is ready to take our messages');
+  }
+});
 
+
+console.log('mailer options:'+JSON.stringify(config.mailer.options))
 /**
  * Forgot for reset password (forgot POST)
  */
@@ -84,6 +93,7 @@ exports.forgot = function (req, res, next) {
             message: 'An email has been sent to the provided email with further instructions.'
           });
         } else {
+          console.error('Failure sending email | '+JSON.stringify(err));
           return res.status(400).send({
             message: 'Failure sending email'
           });

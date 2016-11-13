@@ -126,7 +126,7 @@
 
             break;
           case 'password':
-            data.email = this.passwordEmail;
+            data.username = this.passwordEmail;
             this.passwordSubmit = 'Resetting Password...'
             this.$http.post('/api/auth/forgot',data).then((response) => {
                         // success callback
