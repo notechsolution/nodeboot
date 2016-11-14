@@ -82,7 +82,7 @@ module.exports = {
   mailer: {
     from: process.env.MAILER_FROM || 'support@nodeboot.com',
     options: {
-      service: process.env.MAILER_SERVICE_PROVIDER || 'smtp.163.com',
+      host: process.env.MAILER_SERVICE_PROVIDER || 'smtp.163.com',
       auth: {
         user: process.env.MAILER_EMAIL_ID || 'nodeboot_test@163.com',
         pass: process.env.MAILER_PASSWORD || 'nodeboot1'

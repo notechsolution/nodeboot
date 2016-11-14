@@ -13,6 +13,7 @@ var path = require('path'),
   crypto = require('crypto');
 
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
+
 smtpTransport.verify(function(error, success) {
   if (error) {
     console.log(error);
@@ -21,8 +22,6 @@ smtpTransport.verify(function(error, success) {
   }
 });
 
-
-console.log('mailer options:'+JSON.stringify(config.mailer.options))
 /**
  * Forgot for reset password (forgot POST)
  */
