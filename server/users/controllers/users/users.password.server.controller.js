@@ -119,10 +119,12 @@ exports.validateResetToken = function (req, res) {
     }
   }, function (err, user) {
     if (err || !user) {
-      return res.redirect('/password/reset/invalid');
+      // return res.redirect('/password/reset/invalid');
+      res.render('server/users/views/password',{error:'invalid user or token'});
     }
 
-    res.redirect('/password/reset/' + req.params.token);
+    // res.redirect('/password/reset/' + req.params.token);
+    res.render('server/users/views/password',{token:req.params.token});
   });
 };
 
@@ -144,7 +146,9 @@ exports.reset = function (req, res, next) {
       }, function (err, user) {
         if (!err && user) {
           if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
+
             user.password = passwordDetails.newPassword;
+            console.log('new password:'+user.password)
             user.resetPasswordToken = undefined;
             user.resetPasswordExpires = undefined;
 
@@ -155,6 +159,7 @@ exports.reset = function (req, res, next) {
                 });
               } else {
                 req.login(user, function (err) {
+                  console.log('err:'+JSON.stringify(err));
                   if (err) {
                     res.status(400).send(err);
                   } else {
@@ -179,27 +184,6 @@ exports.reset = function (req, res, next) {
             message: 'Password reset token is invalid or has expired.'
           });
         }
-      });
-    },
-    function (user, done) {
-      res.render('modules/users/server/templates/reset-password-confirm-email', {
-        name: user.displayName,
-        appName: config.app.title
-      }, function (err, emailHTML) {
-        done(err, emailHTML, user);
-      });
-    },
-    // If valid email, send reset email using service
-    function (emailHTML, user, done) {
-      var mailOptions = {
-        to: user.email,
-        from: config.mailer.from,
-        subject: 'Your password has been changed',
-        html: emailHTML
-      };
-
-      smtpTransport.sendMail(mailOptions, function (err) {
-        done(err, 'done');
       });
     }
   ], function (err) {
