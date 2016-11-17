@@ -16,7 +16,7 @@
     "async": "~2.0.1",
     "babel-runtime": "^6.0.0",
     "body-parser": "~1.15.0",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.0.0-alpha.5",
     "chalk": "~1.1.1",
     "compression": "~1.6.1",
     "connect-flash": "~0.1.1",
