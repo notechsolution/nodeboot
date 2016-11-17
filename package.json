@@ -16,7 +16,6 @@
     "async": "~2.0.1",
     "babel-runtime": "^6.0.0",
     "body-parser": "~1.15.0",
-    "bootstrap": "^4.0.0-alpha.5",
     "chalk": "~1.1.1",
     "compression": "~1.6.1",
     "connect-flash": "~0.1.1",
@@ -51,6 +50,7 @@
     "vue": "^1.0.21",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.0.2",
+    "vue-strap": "^1.1.32",
     "vue-validator": "^3.0.0-alpha.1",
     "winston": "^2.2.0"
   },
