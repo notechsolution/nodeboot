@@ -19,7 +19,7 @@
 
 
     </navbar>
-    <Login v-bind:active="activeModel"></Login>
+    <Login v-bind:active.sync="activeModel"></Login>
   </div>
 </template>
 
