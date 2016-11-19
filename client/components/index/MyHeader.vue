@@ -13,7 +13,11 @@
 
       <!-- For right positioning use slot -->
       <li slot="right">
-        <a href="#" @click="openLoginModal">Login</a>
+      <a href="#" @click="openLoginModal('login')">Login</a>
+    </li>
+
+      <li slot="right">
+        <a href="#" @click="openLoginModal('register')">Register</a>
       </li>
 
       <li slot="right" class='fork-me-at-github'>
@@ -24,11 +28,6 @@
 
 
     </navbar>
-    <!--<div class='fork-me-at-github'>-->
-      <!--<a href="https://github.com/notechsolution/nodeboot">-->
-        <!--<img style="position: absolute; top: 0; right: 0; border: 0;" src="../../assets/image/fork-me-github.png" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">-->
-      <!--</a>-->
-    <!--</div>-->
     <Login v-bind:active.sync="activeModel"></Login>
   </div>
 </template>
@@ -48,8 +47,8 @@ export default {
     }
   },
   methods: {
-      openLoginModal: function () {
-      this.activeModel = 'login';
+      openLoginModal: function (which) {
+      this.activeModel = which;
     }
   }
 }
@@ -67,9 +66,7 @@ export default {
 }
 
 .fork-me-at-github {
+  margin-left:100px;
  }
 
- .fork-me-at-github img{
-  z-index: 2000
- }
 </style>
