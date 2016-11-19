@@ -30,7 +30,6 @@
       </carousel>
     </div><!-- /.carousel -->
 
-    <hr class="featurette-divider">
     <my-footer></my-footer>
   </div>
 </template>
