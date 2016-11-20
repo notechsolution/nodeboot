@@ -11,9 +11,7 @@
       </ul>
       <div class="form-register" :class="{ 'active': active == 'register' }" id="form-register">
         <div class="error-message" v-text="registerError"></div>
-        <input type="text" name="name" placeholder="User ID" v-model="registerName" @keyup.enter="submit('register', $event)">
-        <input type="text" name="firstName" placeholder="First Name" v-model="registerFirstName" @keyup.enter="submit('register', $event)">
-        <input type="text" name="lastName" placeholder="Last Name" v-model="registerLastName" @keyup.enter="submit('register', $event)">
+        <input type="text" name="name" placeholder="User Name" v-model="registerName" @keyup.enter="submit('register', $event)">
         <input type="email" name="email" placeholder="Email" v-model="registerEmail" @keyup.enter="submit('register', $event)">
         <input type="password" name="password" placeholder="Password" v-model="registerPassword" @keyup.enter="submit('register', $event)">
         <input type="submit" :class="{ 'disabled': submitted == 'register' }" @click="submit('register', $event)" v-model="registerSubmit" id="registerSubmit">
@@ -55,8 +53,6 @@
 
         // Modal text fields
         registerName: '',
-        registerFirstName: '',
-        registerLastName: '',
         registerEmail: '',
         registerPassword: '',
         loginUsernameOrEmail: '',
@@ -91,8 +87,6 @@
         switch (which) {
           case 'register':
             data.username = this.registerName;
-            data.firstName = this.registerFirstName;
-            data.lastName = this.registerLastName;
             data.email = this.registerEmail;
             data.password = this.registerPassword;
             this.registerSubmit= 'Registering...';
