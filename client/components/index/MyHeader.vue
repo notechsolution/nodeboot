@@ -11,14 +11,25 @@
         <li><a href="link">Option</a></li>
       </dropdown>
 
-      <!-- For right positioning use slot -->
-      <li slot="right">
-      <a href="#" @click="openLoginModal('login')">Login</a>
-    </li>
-
-      <li slot="right">
-        <a href="#" @click="openLoginModal('register')">Register</a>
+      <!-- For right positioning use slot, login/register options -->
+      <div v-if="user == null">
+        <li slot="right">
+        <a href="#" @click="openLoginModal('login')">Login</a>
       </li>
+
+        <li slot="right">
+          <a href="#" @click="openLoginModal('register')">Register</a>
+        </li>
+     </div>
+
+      <!-- For right positioning use slot, logon user -->
+      <div v-if="user != null">
+        <dropdown text="Welcome {{user.username}}" slot="right">
+          <li><a href="/users">User Profile</a></li>
+          <li><a href="/users">Change Password</a></li>
+          <li><a href="/users">Logout</a></li>
+        </dropdown>
+      </div>
 
       <li slot="right" class='fork-me-at-github'>
         <a href="https://github.com/notechsolution/nodeboot">
@@ -43,7 +54,8 @@ export default {
   },
   data(){
     return {
-    activeModel:null
+    activeModel:null,
+    user : null
     }
   },
   methods: {
