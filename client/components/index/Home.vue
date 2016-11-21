@@ -9,24 +9,25 @@
         <slider>
           <img src="../../assets/image/one.png">
           <div class="carousel-caption">
-            <h3>Slide #1</h3>
-            <p>sunt in culpa qui officia deserunt mollit a.</p>
+            <h3>Nodejs Stack</h3>
+            <p>An complete Node.js tech stack, Vuejs, Nodejs, Express, MongoDB</p>
           </div>
         </slider>
         <slider>
           <img src="../../assets/image/two.png">
           <div class="carousel-caption">
-            <h3>Slide #2</h3>
-            <p>sunt in culpa qui officia deserunt mollit a.</p>
+            <h3>Enterprise Starter</h3>
+            <p>It purpose is to make your enterprise application ready from beginning</p>
           </div>
         </slider>
         <slider>
           <img src="../../assets/image/three.png">
           <div class="carousel-caption">
-            <h3>Slide #3</h3>
-            <p>sunt in culpa qui officia deserunt mollit a.</p>
+            <h3>MIT License</h3>
+            <p>NodeBoot.JS is an open source project with MIT license</p>
           </div>
         </slider>
+
       </carousel>
     </div><!-- /.carousel -->
 
