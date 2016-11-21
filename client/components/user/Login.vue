@@ -110,9 +110,11 @@
         // GET /someUrl
           this.$http.post('/api/auth/signin',data).then((response) => {
             // success callback
-            console.log('sign in | sucess');
+
           this.active = null;
-          window.location = "/users";
+          this.user = response.body;
+          window.user = response.body;
+          console.log('sign in | sucess | '+ JSON.stringify(this.user));
         }, (response) => {
             console.log('failed sign in |'+response);
             this.loginSubmit= modal_submit_login;
@@ -135,7 +137,7 @@
 
       }
     },
-    props: ['active']
+    props: ['active','user']
   }
 </script>
 
