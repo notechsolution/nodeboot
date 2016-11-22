@@ -11,17 +11,6 @@
         <li><a href="link">Option</a></li>
       </dropdown>
 
-      <!-- For right positioning use slot, login/register options -->
-      <!--<template v-if="user == null">-->
-      <!--<li slot="right">-->
-      <!--<a href="#" @click="openLoginModal('login')">Login</a>-->
-      <!--</li>-->
-
-      <!--<li slot="right">-->
-      <!--<a href="#" @click="openLoginModal('register')">Register</a>-->
-      <!--</li>-->
-      <!--</template>-->
-
       <li slot="right" v-if="user == null">
         <a href="#" @click="openLoginModal('login')">Login</a>
       </li>
@@ -29,12 +18,17 @@
       <li slot="right" v-if="user == null">
         <a href="#" @click="openLoginModal('register')">Register</a>
       </li>
-
-      <!-- For right positioning use slot, logon user -->
-      <dropdown v-bind:text="welcome" slot="right" v-if="user != null">
+      <dropdown slot='right' v-if="user != null">
+      <a slot="button" href="javascript:void(0)">
+        <i class="glyphicon glyphicon-align-justify"></i>
+        <span>&nbsp;Welcome,</span>
+        <span class="header-user-name">{{user.username}}</span>
+      </a>
+      <ul slot="dropdown-menu" class="dropdown-menu">
         <li><a href="/users">User Profile</a></li>
         <li><a href="/users">Change Password</a></li>
         <li><a href="/users">Logout</a></li>
+        </ul>
       </dropdown>
 
       <li slot="right" class='fork-me-at-github'>
@@ -66,11 +60,6 @@ export default {
     user : window.user
     }
   },
-  computed: {
-    welcome () {
-      return 'Welcome '+this.user.username;
-    }
-   },
   methods: {
       openLoginModal: function (which) {
       this.activeModel = which;
@@ -95,5 +84,12 @@ export default {
   margin-left:100px;
  }
 
+.header-user-name {
+    text-decoration: underline !important;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: top;
+}
 
 </style>
