@@ -4,7 +4,8 @@ var _ = require('lodash'),
   config = require('../config'),
   chalk = require('chalk'),
   fs = require('fs'),
-  winston = require('winston');
+  winston = require('winston'),
+  util = require('util');
 
 // list of valid formats for the logging
 var validFormats = ['combined', 'common', 'dev', 'short', 'tiny'];
@@ -17,6 +18,7 @@ var logger = new winston.Logger({
       level: 'info',
       colorize: true,
       showLevel: true,
+      timestamp: true,
       handleExceptions: true,
       humanReadableUnhandledException: true
     })
@@ -85,7 +87,7 @@ logger.getLogOptions = function getLogOptions() {
 
   return {
     level: 'debug',
-    colorize: false,
+    colorize: true,
     filename: logPath,
     timestamp: true,
     maxsize: configFileLogger.maxsize ? configFileLogger.maxsize : 10485760,
@@ -139,3 +141,23 @@ logger.getLogFormat = function getLogFormat() {
 logger.setupFileLogger();
 
 module.exports = logger;
+
+function formatArgs(args){
+  return [util.format.apply(util.format, Array.prototype.slice.call(args))];
+}
+
+console.log = function(){
+  logger.info.apply(logger, formatArgs(arguments));
+};
+console.info = function(){
+  logger.info.apply(logger, formatArgs(arguments));
+};
+console.warn = function(){
+  logger.warn.apply(logger, formatArgs(arguments));
+};
+console.error = function(){
+  logger.error.apply(logger, formatArgs(arguments));
+};
+console.debug = function(){
+  logger.debug.apply(logger, formatArgs(arguments));
+};
