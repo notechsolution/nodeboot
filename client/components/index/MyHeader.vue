@@ -7,9 +7,18 @@
       </a>
 
       <!-- You can use dropdown component -->
-      <dropdown text="Dropdown">
+      <template v-if="user == null">
+      <dropdown text="Public Dropdown">
         <li><a href="link">Option</a></li>
       </dropdown>
+        </template>
+
+
+      <template v-if="user != null">
+        <dropdown text="Login Dropdown">
+          <li><a href="link">Option</a></li>
+        </dropdown>
+      </template>
 
       <li slot="right" v-if="user == null">
         <a href="#" @click="openLoginModal('login')">Login</a>

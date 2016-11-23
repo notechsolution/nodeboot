@@ -163,6 +163,14 @@ var initGlobalConfigFiles = function (config, assets) {
 };
 
 /**
+ * Load All Menu Items from server.config files
+ * MenuItem -> SubMenuItem (support hierarchy)
+ */
+var initMenuItems = function () {
+   config.menus = {};
+
+}
+/**
  * Initialize global configuration
  */
 var initGlobalConfig = function () {
@@ -208,6 +216,9 @@ var initGlobalConfig = function () {
 
   // Print a warning if config.domain is not set
   validateDomainIsSet(config);
+
+  // Initial Menu Items
+  initMenuItems(config);
 
   // Expose configuration utilities
   config.utils = {
