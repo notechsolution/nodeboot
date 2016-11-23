@@ -94,7 +94,6 @@
                 this.$http.post('/api/auth/signup',data).then((response) => {
                   // success callback
                 this.active = 'login';
-                console.log("success signup:"+JSON.stringify(response));
                 this.registerSubmit= modal_submit_register;
             }, (response) => {
               console.log("signup failed due to :"+response);
