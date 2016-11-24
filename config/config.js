@@ -166,9 +166,36 @@ var initGlobalConfigFiles = function (config, assets) {
  * Load All Menu Items from server.config files
  * MenuItem -> SubMenuItem (support hierarchy)
  */
-var initMenuItems = function () {
-   config.menus = {};
+var initMenuItems = function (config,assets) {
+  config.menus = [];
+  var menuConfigFiles = getGlobbedPaths(assets.server.menus);
+  menuConfigFiles.forEach(function(menuConfigPath){
+    var menuItems = require(path.resolve(menuConfigPath));
+    config.menus = _.union(config.menus,menuItems.menus);
+  })
+  console.log('config.menus:'+JSON.stringify(config.menus));
+}
 
+var getMenuItems = function (config,user){
+  console.log('this.menus:'+JSON.stringify(this.menus));
+  var roles = (user && user.roles ) || ['guest'];
+  var filteredMenuItems = [];
+  config.menus.forEach(function(configMenu){
+    if(_.intersection(configMenu.roles, roles).length>0){
+      var menu = configMenu;
+      if(configMenu.type =='dropdown'){
+        var subMenus = [];
+        configMenu.subMenus.forEach(function(configSubMenu){
+          if(!configSubMenu.roles || _.intersection(configSubMenu.roles, roles).length>0){
+            subMenus.push(configSubMenu);
+          }
+        });
+        menu.subMenus = subMenus;
+      }
+      filteredMenuItems.push(menu);
+    }
+  })
+  return filteredMenuItems;
 }
 /**
  * Initialize global configuration
@@ -218,12 +245,13 @@ var initGlobalConfig = function () {
   validateDomainIsSet(config);
 
   // Initial Menu Items
-  initMenuItems(config);
+  initMenuItems(config,assets);
 
   // Expose configuration utilities
   config.utils = {
     getGlobbedPaths: getGlobbedPaths,
-    validateSessionSecret: validateSessionSecret
+    validateSessionSecret: validateSessionSecret,
+    getMenuItems: getMenuItems
   };
 
   return config;

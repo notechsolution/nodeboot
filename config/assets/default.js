@@ -12,7 +12,8 @@ module.exports = {
     models: 'server/*/models/**/*.js',
     routes: ['server/!(core)/routes/**/*.js', 'server/core/routes/**/*.js'],
     sockets: 'server/*/sockets/**/*.js',
-    config: ['server/*/config/*.js'],
+    config: ['server/*/config/*.config.js'],
+    menus: ['server/*/config/*.menu.js'],
     policies: 'server/*/policies/*.js',
     views: ['server/*/views/*.html']
   }
