@@ -173,11 +173,9 @@ var initMenuItems = function (config,assets) {
     var menuItems = require(path.resolve(menuConfigPath));
     config.menus = _.union(config.menus,menuItems.menus);
   })
-  console.log('config.menus:'+JSON.stringify(config.menus));
 }
 
 var getMenuItems = function (config,user){
-  console.log('this.menus:'+JSON.stringify(this.menus));
   var roles = (user && user.roles ) || ['guest'];
   var filteredMenuItems = [];
   config.menus.forEach(function(configMenu){
@@ -195,7 +193,7 @@ var getMenuItems = function (config,user){
       filteredMenuItems.push(menu);
     }
   })
-  return filteredMenuItems;
+  return _.sortBy(filteredMenuItems,['sequence']);
 }
 /**
  * Initialize global configuration
