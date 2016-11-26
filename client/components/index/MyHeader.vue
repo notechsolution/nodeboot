@@ -7,18 +7,26 @@
       </a>
 
       <!-- You can use dropdown component -->
-      <template v-if="user == null">
-      <dropdown text="Public Dropdown">
-        <li><a href="link">Option</a></li>
-      </dropdown>
-        </template>
+      <template v-for='menu in menuItems'>
 
+        <dropdown v-if='!menu.type || menu.type=="dropdown"'>
+          <a slot="button" href="javascript:void(0)">
+            <span>{{menu.title}}</span>
+            <i class="glyphicon glyphicon-menu-down"></i>
+          </a>
 
-      <template v-if="user != null">
-        <dropdown text="Login Dropdown">
-          <li><a href="link">Option</a></li>
+          <li v-for='subMenu in menu.subMenus'>
+            <a href="{{subMenu.href}}">{{subMenu.title}}</a>
+          </li>
         </dropdown>
+
+        <ul class="nav navbar-nav"  v-if='menu.type=="link"'>
+          <li class="dropdown"> <a href="{{menu.href}}">{{menu.title}}</a></li>
+        </ul>
+
+
       </template>
+
 
       <li slot="right" v-if="user == null">
         <a href="#" @click="openLoginModal('login')">Login</a>
@@ -27,6 +35,7 @@
       <li slot="right" v-if="user == null">
         <a href="#" @click="openLoginModal('register')">Register</a>
       </li>
+
       <dropdown slot='right' v-if="user != null">
       <a slot="button" href="javascript:void(0)">
         <i class="glyphicon glyphicon-align-justify"></i>
@@ -66,7 +75,8 @@ export default {
   data(){
     return {
     activeModel:null,
-    user : window.user
+    user : window.user,
+    menuItems: window.menuItems || []
     }
   },
   methods: {

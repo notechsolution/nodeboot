@@ -3,9 +3,9 @@
 module.exports = {
   menus :[
     {
-      title: 'User Profile',
+      title: 'Products',
       roles: ['user','admin'],
-      sequence: 3,
+      sequence: 1,
       subMenus : [
         {
           title: 'NodeBootJS',

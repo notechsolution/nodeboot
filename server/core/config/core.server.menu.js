@@ -3,7 +3,7 @@
 module.exports = {
   menus :[
     {
-      title: 'Introduction',
+      title: 'Pricing',
       roles: ['guest'],
       type: 'dropdown',
       sequence: 1,
@@ -19,10 +19,10 @@ module.exports = {
       ]
     },
     {
-      title: 'Feature',
+      title: 'User Guide',
       roles: ['user','admin'],
       type: 'link',
-      sequence: 1,
+      sequence: 2,
       href: '/#'
     }
   ]
