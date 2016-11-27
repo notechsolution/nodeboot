@@ -59,7 +59,7 @@
 
 
     </navbar>
-    <Login v-bind:active.sync="activeModel" v-bind:user.sync="user"></Login>
+    <Login v-bind:active.sync="activeModel" v-bind:user.sync="user" v-bind:menu-items.sync ="menuItems"></Login>
   </div>
 </template>
 

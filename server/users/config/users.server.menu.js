@@ -8,11 +8,11 @@ module.exports = {
       sequence: 1,
       subMenus : [
         {
-          title: 'NodeBootJS',
+          title: 'Product A',
           href:'/'
         },
         {
-          title: 'MEANJS',
+          title: 'Product B',
           href:'http://meanjs.org/'
         }
       ]

@@ -111,9 +111,10 @@
             // success callback
 
           this.active = null;
-          this.user = response.body;
-          window.user = response.body;
-          console.log('sign in | sucess | '+ JSON.stringify(this.user));
+          this.user = response.body.user;
+          this.menuItems = response.body.menuItems;
+          window.user = this.user;
+          window.menuItems = this.menuItems;
         }, (response) => {
             console.log('failed sign in |'+response);
             this.loginSubmit= modal_submit_login;
@@ -136,7 +137,7 @@
 
       }
     },
-    props: ['active','user']
+    props: ['active','user','menuItems']
   }
 </script>
 
