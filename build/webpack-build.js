@@ -75,7 +75,7 @@ var initDistFolder = function (entries) {
       if(entries[viewName]){
         // inject the dependency js file into ejs file
         var scriptCode = '<script src="/dist/'+viewName+'.js"></script>';
-        sed('-i',/<\/body>/, scriptCode+'\r\n</body>',viewHtmlPath);
+        sed('-i',/<inject-scripts>/, scriptCode+'\r\n',viewHtmlPath);
       }
 
     });

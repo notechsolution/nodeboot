@@ -28,7 +28,8 @@ exports.renderIndex = function (req, res) {
   res.render('server/core/views/index', {
     user: JSON.stringify(safeUserObject),
     sharedConfig: JSON.stringify(config.shared),
-    menuItems: JSON.stringify(config.utils.getMenuItems(config,req.user))
+    menuItems: JSON.stringify(config.utils.getMenuItems(config,req.user)),
+    title:config.app.title
   });
 };
 
