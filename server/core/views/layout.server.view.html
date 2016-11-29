@@ -23,15 +23,19 @@
 
   <!--Embedding The User Object And Menu Items-->
   <script type="text/javascript">
-    window.user = {{{user}}};
+    window.user = {{{user}}}
     window.menuItems = {{{menuItems}}}
   </script>
 </head>
 
 <body>
   <section class="content">
-    <section class="container">
+    <section class="container-fluid">
+      <my-header></my-header>
+
       {{{block "content"}}}
+
+      <my-footer></my-footer>
     </section>
   </section>
 </body>

@@ -1,4 +1,6 @@
 'use strict';
+var path = require('path');
+var config = require(path.resolve('./config/config'));
 
 module.exports = function (app) {
   // User Routes
@@ -11,7 +13,10 @@ module.exports = function (app) {
   app.route('/api/users/password').post(users.changePassword);
   app.route('/api/users/picture').post(users.changeProfilePicture);
   app.route('/users').get(function (req,res) {
-    res.render('server/users/views/user');
+    res.render('server/users/views/user',{
+      menuItems: JSON.stringify(config.utils.getMenuItems(config,req.user)),
+      title:config.app.title
+    });
   });
 
 

@@ -1,6 +1,5 @@
 <template>
   <div id="app" class="container-fluid">
-    <my-header></my-header>
 
     <!-- Carousel
    ================================================== -->
@@ -31,7 +30,6 @@
       </carousel>
     </div><!-- /.carousel -->
 
-    <my-footer></my-footer>
   </div>
 </template>
 
