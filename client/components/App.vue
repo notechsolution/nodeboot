@@ -20,33 +20,14 @@
       <a href="https://github.com/vuejs/vuex/" target="_blank">vuex</a> for state management.
     </p>
     <br/>
-    <div id="fake-nav">
-      <a href="#register" @click="openLoginModal('register', $event)">Register</a>
-      <a href="#login" @click="openLoginModal('login', $event)">Login</a>
-    </div>
-    <Login v-bind:active="activeModal"></Login>
   </div>
 </template>
 
 <script>
 import Hello from './Hello'
-import Login from './user/Login'
 export default {
   components: {
-    Hello,
-    Login
-  },
-  data(){
-    return {
-
-    }
-  },
-  methods: {
-    openLoginModal: function (which, e) {
-      console.log(JSON.stringify(which))
-      e.preventDefault();
-      this.activeModal = which;
-    }
+    Hello
   }
 }
 
@@ -61,6 +42,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
   height: 100%;
 }
 
