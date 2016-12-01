@@ -8,19 +8,28 @@ import MyFooter from '../components/index/MyFooter'
 Vue.use(require('vue-resource'));
 Vue.use(VueRouter);
 
-const router = new VueRouter({
-  base: __dirname,
-  routes: [
-    { path: '/', component: App },
-    { path: '/password', component: Password }
-  ]
+var router = new VueRouter({hashbang: false})
+router.map({
+  '/': {
+    component: App
+  },
+  '/password': {
+    component: Password
+  }
 })
 
 /* eslint-disable no-new */
-new Vue({
-  router,
-  el : "body",
-  components: { App,MyHeader,MyFooter,Password }
-})
+// var app = new Vue({
+//   components: { App,MyHeader,MyFooter,Password }
+// })
+
+Vue.component('App',App);
+Vue.component('MyHeader',MyHeader);
+Vue.component('MyFooter',MyFooter);
+Vue.component('Password',Password);
+
+// router.start(app, 'body')
+var app = Vue.extend({})
+router.start(app, 'body')
 
 require('bootstrap/dist/css/bootstrap.css')
