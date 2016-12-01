@@ -51,7 +51,7 @@
     "validator": "~6.0.0",
     "vue": "^1.0.21",
     "vue-resource": "^1.0.3",
-    "vue-router": "^2.0.2",
+    "vue-router": "^0.7.13",
     "vue-strap": "^1.1.32",
     "vue-validator": "^3.0.0-alpha.1",
     "winston": "^2.2.0"
