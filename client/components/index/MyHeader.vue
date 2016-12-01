@@ -44,7 +44,7 @@
       </a>
       <ul slot="dropdown-menu" class="dropdown-menu">
         <li><a href="/users">User Profile</a></li>
-        <li><a href="/users">Change Password</a></li>
+        <li><a href="/users/password">Change Password</a></li>
         <li><a href="/api/auth/signout">Logout</a></li>
         </ul>
       </dropdown>
