@@ -156,7 +156,7 @@
     visibility: hidden;
     cursor: pointer;
     overflow-y: auto;
-    z-index: 3;
+    z-index: 16;
     font-family: 'Lato', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
     font-size: 14px;
     background-color: rgba(17, 17, 17, .9);
