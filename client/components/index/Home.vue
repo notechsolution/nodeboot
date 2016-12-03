@@ -61,6 +61,7 @@ export default {
   color: #2c3e50;
   margin-left: 10%;
   margin-right: 10%;
+  margin-top: 100px;
   font-family: Source Sans Pro, Helvetica, sans-serif;
 }
 

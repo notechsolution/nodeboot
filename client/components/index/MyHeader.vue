@@ -72,6 +72,12 @@ export default {
   dropdown,
   Login
   },
+  ready(){
+  // TODO: below statement is to remove the paddingTop when there is forkme image extend the div offsetHeight.
+  // Please do remove them if you haven't such image
+    document.body.style.paddingTop = '0';
+  },
+
   data(){
     return {
     activeModel:null,
