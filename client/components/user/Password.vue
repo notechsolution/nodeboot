@@ -8,7 +8,7 @@
         </h3>
       </div>
 
-      <div class="form-password active"  id="form-password">
+      <div class="form-password" :class="{ 'active': active == 'password' }"  id="form-password">
 
         <div class="error-message" v-text="passwordError"></div>
         <input type="password" name="email" placeholder="Current Password" v-model="currentPassword" v-if="token==null">
@@ -17,6 +17,15 @@
         <input type="submit" :class="{ 'disabled': submitted == 'password' }" @click="submit('password', $event)"
                v-model="passwordSubmit" id="passwordSubmit">
       </div>
+
+      <div class="form-password" :class="{ 'active': active == 'success' }"  id="success">
+
+        <div class="alert alert-success" role="alert">Your password have been changed successfully. Please click "Continue" to re-login</div>
+        <button type="button" class="btn btn-success btn-lg btn-block">
+          <a href="/">Continue</a>
+        </button>
+      </div>
+
     </div>
   </div>
 </template>
@@ -35,7 +44,7 @@
         newPassword: '',
         verifyPassword: '',
         submitted : '',
-
+        active :'password',
         // Modal error messages
         passwordError: ''
       }
@@ -59,17 +68,35 @@
         };
         switch (which) {
           case 'password':
+            data.currentPassword = this.currentPassword;
             data.newPassword = this.newPassword;
             data.verifyPassword = this.verifyPassword;
-            this.passwordSubmit = 'Resetting Password...'
-            this.$http.post('/api/auth/reset/'+this.token,data).then((response) => {
+            this.passwordSubmit = 'Resetting Password...';
+            if(!token){
+             // change password
+             this.$http.post('/api/users/password',data).then((response) => {
                         // success callback
-                        console.log('reset password | success');
-                      window.location = "/"
+                        console.log('change password | success');
+                       this.passwordSubmit = "";
+                       this.active = 'success';
                     }, (response) => {
                         console.log('failed reset password |'+response);
                         this.passwordSubmit= modal_submit_password;
+                        this.passwordSubmit = "";
                     });
+            } else{
+              // reset password
+              this.$http.post('/api/auth/reset/'+this.token,data).then((response) => {
+                          // success callback
+                          console.log('reset password | success');
+                        window.location = "/"
+                      }, (response) => {
+                          console.log('failed reset password |'+response);
+                          this.passwordError = response && response.message;
+                          this.passwordSubmit = modal_submit_password;
+                      });
+            }
+
             break;
         }
 
@@ -80,7 +107,7 @@
 
 </script>
 
-<style>
+<style scoped>
   .user-modal-container * {
     box-sizing: border-box;
   }
@@ -98,7 +125,6 @@
     z-index: 3;
     font-family: 'Lato', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
     font-size: 14px;
-    background-color: rgba(17, 17, 17, .9);
     -webkit-transition: all 0.25s linear;
     -moz-transition: all 0.25s linear;
     -o-transition: all 0.25s linear;
@@ -113,7 +139,7 @@
 
   .user-modal-container .user-modal {
     position: relative;
-    margin: 50px auto;
+    margin: 150px auto;
     width: 90%;
     max-width: 500px;
     background-color: #f6f6f6;
