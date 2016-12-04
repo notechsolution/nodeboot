@@ -9,8 +9,7 @@
       </div>
 
       <div class="form-password" :class="{ 'active': active == 'password' }"  id="form-password">
-
-        <div class="error-message" v-text="passwordError"></div>
+        <div class="alert alert-danger" role="alert" v-text="passwordError" v-if="passwordError"></div>
         <input type="password" name="email" placeholder="Current Password" v-model="currentPassword" v-if="token==null">
         <input type="password" name="email" placeholder="New Password" v-model="newPassword">
         <input type="password" name="email" placeholder="Confirm New Password" v-model="verifyPassword" @blur="verifyConfirmPassword">
@@ -20,9 +19,9 @@
 
       <div class="form-password" :class="{ 'active': active == 'success' }"  id="success">
 
-        <div class="alert alert-success" role="alert">Your password have been changed successfully. Please click "Continue" to re-login</div>
+        <div class="alert alert-success" role="alert">Your password have been changed successfully. </div>
         <button type="button" class="btn btn-success btn-lg btn-block">
-          <a href="/">Continue</a>
+          <a href="/">Home</a>
         </button>
       </div>
 
@@ -72,7 +71,7 @@
             data.newPassword = this.newPassword;
             data.verifyPassword = this.verifyPassword;
             this.passwordSubmit = 'Resetting Password...';
-            if(!token){
+            if(!this.token){
              // change password
              this.$http.post('/api/users/password',data).then((response) => {
                         // success callback
@@ -80,9 +79,10 @@
                        this.passwordSubmit = "";
                        this.active = 'success';
                     }, (response) => {
-                        console.log('failed reset password |'+response);
+                        console.log('failed reset password |'+response.body.message);
+                        this.passwordError = response && response.body.message;
                         this.passwordSubmit= modal_submit_password;
-                        this.passwordSubmit = "";
+                        this.submitted = "";
                     });
             } else{
               // reset password
@@ -91,9 +91,10 @@
                           console.log('reset password | success');
                         window.location = "/"
                       }, (response) => {
-                          console.log('failed reset password |'+response);
-                          this.passwordError = response && response.message;
+                          console.log('failed reset password |'+response.body.message);
+                          this.passwordError = response && response.body.message;
                           this.passwordSubmit = modal_submit_password;
+                          this.submitted = "";
                       });
             }
 
