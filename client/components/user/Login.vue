@@ -141,7 +141,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .user-modal-container * {
     box-sizing: border-box;
   }
