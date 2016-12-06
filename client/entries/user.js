@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import App from '../components/App'
 import Password from '../components/user/Password'
+import UserProfile from '../components/user/UserProfile'
 import MyHeader from '../components/index/MyHeader'
 import MyFooter from '../components/index/MyFooter'
 
@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 var router = new VueRouter({hashbang: false})
 router.map({
   '/': {
-    component: App
+    component: UserProfile
   },
   '/password': {
     component: Password
@@ -23,7 +23,7 @@ router.map({
 //   components: { App,MyHeader,MyFooter,Password }
 // })
 
-Vue.component('App',App);
+Vue.component('UserProfile',UserProfile);
 Vue.component('MyHeader',MyHeader);
 Vue.component('MyFooter',MyFooter);
 Vue.component('Password',Password);
