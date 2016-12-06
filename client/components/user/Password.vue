@@ -8,9 +8,9 @@
         </h3>
       </div>
 
-      <div class="form-password" :class="{ 'active': active == 'password' }"  id="form-password">
+      <div class="form-password" :class="{ 'active': active == 'password'  && isValid }"  id="form-password">
         <div class="alert alert-danger" role="alert" v-text="passwordError" v-if="passwordError"></div>
-        <input type="password" name="email" placeholder="Current Password" v-model="currentPassword" v-if="token==null">
+        <input type="password" name="email" placeholder="Current Password" v-model="currentPassword" v-if="user!=null">
         <input type="password" name="email" placeholder="New Password" v-model="newPassword">
         <input type="password" name="email" placeholder="Confirm New Password" v-model="verifyPassword" @blur="verifyConfirmPassword">
         <input type="submit" :class="{ 'disabled': submitted == 'password' }" @click="submit('password', $event)"
@@ -23,6 +23,11 @@
         <button type="button" class="btn btn-success btn-lg btn-block">
           <a href="/">Home</a>
         </button>
+      </div>
+
+      <div class="form-password" :class="{ 'active': errorCode == 'INVALID' }"  id="validateError">
+
+        <div class="alert alert-danger" role="alert">Your token is expired or invalid. Please submit password change request again if necessary </div>
       </div>
 
     </div>
@@ -45,10 +50,16 @@
         submitted : '',
         active :'password',
         // Modal error messages
-        passwordError: ''
+        passwordError: '',
+        token : this.$route.query.token,
+        errorCode: this.$route.query.err,
+        user: window.user
       }
     },
     methods: {
+      isValid : function (){
+        return this.user || token != null
+      },
       verifyConfirmPassword: function(){
         if(!this.verifyPassword){
           this.passwordError = "Please input confirm password"
@@ -102,8 +113,7 @@
         }
 
       }
-    },
-    props: ['token']
+    }
   }
 
 </script>

@@ -118,13 +118,8 @@ exports.validateResetToken = function (req, res) {
       $gt: Date.now()
     }
   }, function (err, user) {
-    if (err || !user) {
-      // return res.redirect('/password/reset/invalid');
-      res.render('server/users/views/password',{error:'invalid user or token'});
-    }
-
-    // res.redirect('/password/reset/' + req.params.token);
-    res.render('server/users/views/password',{token:req.params.token});
+    var errorCode =  (err || !user)? '&err=INVALID':''
+    res.redirect('/users#/password?token=' + req.params.token+errorCode);
   });
 };
 
