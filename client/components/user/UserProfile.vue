@@ -23,7 +23,7 @@
               </tr>
               <tr>
                 <td>Email</td>
-                <td><a href="{{user.email}}">{{user.email}}</a></td>
+                <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
               </tr>
               <tr>
               <td>Roles</td>
