@@ -10,7 +10,7 @@
         </li>
       </ul>
       <div class="form-register" :class="{ 'active': active == 'register' }" id="form-register">
-        <div class="error-message" v-text="registerError"></div>
+        <div class="alert alert-danger" v-text="registerError" v-if="registerError"></div>
         <input type="text" name="name" placeholder="User Name" v-model="registerName" @keyup.enter="submit('register', $event)">
         <input type="email" name="email" placeholder="Email" v-model="registerEmail" @keyup.enter="submit('register', $event)">
         <input type="password" name="password" placeholder="Password" v-model="registerPassword" @keyup.enter="submit('register', $event)">
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="form-login" :class="{ 'active': active == 'login' }" id="form-login">
-        <div class="error-message" v-text="loginError"></div>
+        <div class="alert alert-danger" v-text="loginError" v-if="loginError"></div>
         <input type="text" name="user" placeholder="Email or Username" v-model="loginUsernameOrEmail" @keyup.enter="submit('login', $event)">
         <input type="password" name="password" placeholder="Password" v-model="loginPassword" @keyup.enter="submit('login', $event)">
         <input type="submit" :class="{ 'disabled': submitted == 'login' }" @click="submit('login', $event)" v-model="loginSubmit" id="loginSubmit">
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="form-password" :class="{ 'active': active == 'password' }" id="form-password">
-        <div class="error-message" v-text="passwordError"></div>
+        <div class="alert alert-danger" v-text="passwordError" v-if="passwordError"></div>
         <input type="text" name="email" placeholder="Email" v-model="passwordEmail" @keyup.enter="submit('password', $event)">
         <input type="submit" :class="{ 'disabled': submitted == 'password' }" @click="submit('password', $event)" v-model="passwordSubmit" id="passwordSubmit">
       </div>
@@ -128,9 +128,12 @@
                         // success callback
                         console.log('reset password | success');
                       this.active = 'login';
+                      this.submitted ='';
                     }, (response) => {
                         console.log('failed reset password |'+response);
-                        this.loginSubmit= modal_submit_password;
+                        this.passwordSubmit= modal_submit_password;
+                        this.passwordError = response && response.body.message;
+                        this.submitted ='';
                     });
             break;
         }
