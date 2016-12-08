@@ -7,18 +7,20 @@ var acl = require('acl');
 
 // Using the memory backend
 acl = new acl(new acl.memoryBackend());
+var path = require('path');
+var config = require(path.resolve('./config/config'));
 
 /**
  * Invoke Admin Permissions
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
-    roles: ['admin'],
+    roles: ['user'],
     allows: [{
-      resources: '/api/users',
+      resources: '/users',
       permissions: '*'
     }, {
-      resources: '/api/users/:userId',
+      resources: '/api/auth/signout',
       permissions: '*'
     }]
   }]);
@@ -40,8 +42,11 @@ exports.isAllowed = function (req, res, next) {
         // Access granted! Invoke next middleware
         return next();
       } else {
-        return res.status(403).json({
-          message: 'User is not authorized'
+        return res.status(500).render('server/core/views/500', {
+          error: 'Oops! Please kindly login to continue',
+          menuItems: JSON.stringify(config.utils.getMenuItems(config,req.user)),
+          title:config.app.title,
+          user:req.user
         });
       }
     }

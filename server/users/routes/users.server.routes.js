@@ -6,6 +6,7 @@ var validator = require('validator')
 module.exports = function (app) {
   // User Routes
   var users = require('../controllers/users.server.controller');
+  var adminPolicy = require('../policies/admin.server.policy');
 
   // Setting up the users profile api
   app.route('/api/users/me').get(users.me);
@@ -13,7 +14,7 @@ module.exports = function (app) {
   app.route('/api/users/accounts').delete(users.removeOAuthProvider);
   app.route('/api/users/password').post(users.changePassword);
   app.route('/api/users/picture').post(users.changeProfilePicture);
-  app.route('/users').get(function (req,res) {
+  app.route('/users').get(adminPolicy.isAllowed,function (req,res) {
     var safeUserObject = null;
     if (req.user) {
       safeUserObject = {

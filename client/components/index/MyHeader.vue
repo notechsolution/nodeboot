@@ -28,15 +28,15 @@
       </template>
 
 
-      <li slot="right" v-if="user == null">
+      <li slot="right" v-if="!isLogin()">
         <a href="#" @click="openLoginModal('login')">Login</a>
       </li>
 
-      <li slot="right" v-if="user == null">
+      <li slot="right" v-if="!isLogin()">
         <a href="#" @click="openLoginModal('register')">Register</a>
       </li>
 
-      <dropdown slot='right' v-if="user != null">
+      <dropdown slot='right' v-if="isLogin()">
       <a slot="button" href="javascript:void(0)">
         <i class="glyphicon glyphicon-align-justify"></i>
         <span>&nbsp;Welcome,</span>
@@ -81,14 +81,17 @@ export default {
   data(){
     return {
     activeModel:null,
-    user : window.user,
+    user : window.user || {},
     menuItems: window.menuItems || []
     }
   },
   methods: {
       openLoginModal: function (which) {
       this.activeModel = which;
-    }
+    },
+     isLogin : function(){
+      return user && user.username!='' && user.username!=null;
+     }
   }
 }
 
