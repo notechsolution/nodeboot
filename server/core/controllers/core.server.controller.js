@@ -37,7 +37,10 @@ exports.renderIndex = function (req, res) {
  */
 exports.renderServerError = function (req, res) {
   res.status(500).render('server/core/views/500', {
-    error: 'Oops! Something went wrong...'
+    error: 'Oops! Something went wrong...',
+    menuItems: JSON.stringify(config.utils.getMenuItems(config,req.user)),
+    title:config.app.title,
+    user:{}
   });
 };
 

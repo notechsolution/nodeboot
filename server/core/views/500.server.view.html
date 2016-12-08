@@ -1,8 +1,14 @@
 {{!< layout}}
 
 {{#contentFor 'content'}}
+<div id="app" class="container" style="margin-top: 10%;">
 <h1>Server Error</h1>
 <pre>
   {{error}}
 </pre>
+</div>
+{{/contentFor}}
+
+{{#contentFor 'myScript'}}
+<injected-scripts/>
 {{/contentFor}}
