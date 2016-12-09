@@ -36,11 +36,12 @@ exports.renderIndex = function (req, res) {
  * Render the server error page
  */
 exports.renderServerError = function (req, res) {
-  res.status(500).render('server/core/views/500', {
+  res.status(500).render('server/core/views/error', {
     error: 'Oops! Something went wrong...',
     menuItems: JSON.stringify(config.utils.getMenuItems(config,req.user)),
     title:config.app.title,
-    user:{}
+    user:{},
+    errorView:'error_500'
   });
 };
 
@@ -50,19 +51,27 @@ exports.renderServerError = function (req, res) {
  */
 exports.renderNotFound = function (req, res) {
 
-  res.status(404).format({
-    'text/html': function () {
-      res.render('server/core/views/404', {
-        url: req.originalUrl
-      });
-    },
-    'application/json': function () {
-      res.json({
-        error: 'Path not found'
-      });
-    },
-    'default': function () {
-      res.send('Path not found');
-    }
+  // res.status(404).format({
+  //   'text/html': function () {
+  //     res.render('server/core/views/404', {
+  //       url: req.originalUrl
+  //     });
+  //   },
+  //   'application/json': function () {
+  //     res.json({
+  //       error: 'Path not found'
+  //     });
+  //   },
+  //   'default': function () {
+  //     res.send('Path not found');
+  //   }
+  // });
+
+  return res.status(400).render('server/core/views/error', {
+    menuItems: JSON.stringify(config.utils.getMenuItems(config,req.user)),
+    title:config.app.title,
+    user:req.user,
+    errorView:'error_400'
   });
+
 };

@@ -42,11 +42,12 @@ exports.isAllowed = function (req, res, next) {
         // Access granted! Invoke next middleware
         return next();
       } else {
-        return res.status(500).render('server/core/views/500', {
+        return res.status(500).render('server/core/views/error', {
           error: 'Oops! Please kindly login to continue',
           menuItems: JSON.stringify(config.utils.getMenuItems(config,req.user)),
           title:config.app.title,
-          user:req.user
+          user:req.user,
+          errorView:'error_500'
         });
       }
     }
