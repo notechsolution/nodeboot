@@ -6,25 +6,21 @@
     <div class="bs-example">
       <carousel>
         <slider>
-          <img src="../../assets/image/one.png">
+          <img src="../../assets/image/stars.png">
           <div class="carousel-caption">
-            <h3>Nodejs Stack</h3>
+            <h3>NodeBootJS</h3>
             <p>An complete Node.js tech stack, Vuejs, Nodejs, Express, MongoDB</p>
           </div>
         </slider>
         <slider>
-          <img src="../../assets/image/two.png">
+          <img src="../../assets/image/boot.png">
           <div class="carousel-caption">
             <h3>Enterprise Starter</h3>
-            <p>It purpose is to make your enterprise application ready from beginning</p>
+            <p>Empower your enterprise application ready from beginning</p>
           </div>
         </slider>
         <slider>
-          <img src="../../assets/image/three.png">
-          <div class="carousel-caption">
-            <h3>MIT License</h3>
-            <p>NodeBoot.JS is an open source project with MIT license</p>
-          </div>
+          <img src="../../assets/image/opensource.png">
         </slider>
 
       </carousel>
@@ -61,7 +57,7 @@ export default {
   color: #2c3e50;
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 100px;
+  margin-top: 6%;
   font-family: Source Sans Pro, Helvetica, sans-serif;
 }
 
