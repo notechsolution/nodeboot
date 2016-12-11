@@ -2,7 +2,7 @@
   <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
     <div class="container-fluid">
       <div class='row my-footer'>
-&copy; 2016 NodeBoot.JS.  Inspired by <a href="http://meanjs.org/">MEAN.js</a>
+&copy; 2016 NodeBoot.JS.  Inspired by <a href="http://meanjs.org/">MEAN.js. </a> MIT license
         </div>
     </div>
   </nav>
