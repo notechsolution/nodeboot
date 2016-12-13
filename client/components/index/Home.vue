@@ -4,13 +4,17 @@
     <!-- Carousel
    ================================================== -->
     <div class="bs-example">
-      <carousel>
+      <carousel interval=6500>
         <slider>
-          <img src="../../assets/image/stars.png">
-          <div class="carousel-caption">
-            <h3>NodeBootJS</h3>
-            <p>An complete Node.js tech stack, Vuejs, Nodejs, Express, MongoDB</p>
-          </div>
+          <div style="position:relative;">
+            <div id='particles-js'>
+            </div>
+              <img src="../../assets/image/stars.png" class="slider-img">
+              <div class="carousel-caption">
+                <h3>NodeBootJS</h3>
+                <p>An complete Node.js tech stack, Vuejs, Nodejs, Express, MongoDB</p>
+              </div>
+        </div>
         </slider>
         <slider>
           <img src="../../assets/image/boot.png">
@@ -33,6 +37,9 @@
 import MyHeader from './MyHeader'
 import MyFooter from './MyFooter'
 import { carousel,slider  } from 'vue-strap'
+import particles from 'particles.js'
+import particlesJSON from './particles-config.js'
+
 export default {
   components: {
     MyHeader,
@@ -40,13 +47,19 @@ export default {
     carousel,
     slider
   },
+  ready (){
+    this.loadParticles();
+  },
+
   data(){
     return {
       activeLoginModal:false
     }
   },
   methods: {
-
+    loadParticles : function(){
+     particlesJS('particles-js',particlesJSON);
+}
   }
 }
 
@@ -63,5 +76,14 @@ export default {
 
 .bs-example {
     margin-bottom: 0;
+}
+.slider-img {
+    width: 100%;
+    height: 100%;
+}
+
+#particles-js {
+  position:absolute;
+  width:100%;
 }
 </style>
