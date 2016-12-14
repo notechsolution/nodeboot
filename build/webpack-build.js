@@ -15,30 +15,52 @@ module.exports.package = function (app, callback) {
     ? require('./webpack.dev.conf')(entries)
     : require('./webpack.prod.conf')(entries)
 
-  var compiler = webpack(webpackConfig)
-  var devMiddleware = require('webpack-dev-middleware')(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-    stats: {
-      colors: true,
-      chunks: false
-    }
-  })
-
-  var hotMiddleware = require('webpack-hot-middleware')(compiler)
-// force page reload when html-webpack-plugin template changes
-  compiler.plugin('compilation', function (compilation) {
-    compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-      hotMiddleware.publish({ action: 'reload' })
-      cb()
+  if (process.env.NODE_ENV === 'development') {
+    var compiler = webpack(webpackConfig);
+    var devMiddleware = require('webpack-dev-middleware')(compiler, {
+      publicPath: webpackConfig.output.publicPath,
+      stats: {
+        colors: true,
+        chunks: false
+      }
     })
-  })
 
-// serve webpack bundle output
-  app.use(devMiddleware)
+    var hotMiddleware = require('webpack-hot-middleware')(compiler)
+    // force page reload when html-webpack-plugin template changes
+    compiler.plugin('compilation', function (compilation) {
+      compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+        hotMiddleware.publish({action: 'reload'})
+        cb()
+      })
+    })
 
-// enable hot-reload and state-preserving
-// compilation error display
-  app.use(hotMiddleware)
+    // serve webpack bundle output
+    app.use(devMiddleware)
+
+    // enable hot-reload and state-preserving
+    // compilation error display
+    app.use(hotMiddleware);
+
+    if (callback) {
+      callback();
+    }
+  } else {
+    console.log('webpackConfig:'+webpackConfig.length);
+    webpackConfig.forEach(function (webpackConfigItem){
+      console.log(JSON.stringify(webpackConfigItem));
+      webpack(webpackConfigItem, function (err, stats) {
+        // spinner.stop()
+        if (err) throw err
+        process.stdout.write(stats.toString({
+            colors: true,
+            modules: false,
+            children: false,
+            chunks: false,
+            chunkModules: false
+          }) + '\n')
+      });
+    })
+  }
 
 
 }
@@ -68,15 +90,15 @@ var initDistFolder = function (entries) {
 
   //inject js into view file for development mode, for production env, inject via webpack directly
   if (process.env.NODE_ENV === 'development') {
-    var views = config.utils.getGlobbedPaths(viewPath+'/**/*.server.view.html');
+    var views = config.utils.getGlobbedPaths(viewPath + '/**/*.server.view.html');
     views.forEach(function (viewHtmlPath) {
 
-      var viewName = viewHtmlPath.substring((viewHtmlPath.lastIndexOf("/")+1),viewHtmlPath.lastIndexOf(".server.view.html"));
-      if(entries[viewName]){
+      var viewName = viewHtmlPath.substring((viewHtmlPath.lastIndexOf("/") + 1), viewHtmlPath.lastIndexOf(".server.view.html"));
+      if (entries[viewName]) {
         // inject the dependency js file into ejs file
-        var scriptCode = '<script src="/dist/'+viewName+'.js"></script>';
+        var scriptCode = '<script src="/dist/' + viewName + '.js"></script>';
         // sed('-i',/<inject-scripts>/, scriptCode+'\r\n',viewHtmlPath);
-        sed('-i',/<injected-scripts\/>/, scriptCode+'\r\n',viewHtmlPath);
+        sed('-i', /<injected-scripts\/>/, scriptCode + '\r\n', viewHtmlPath);
       }
 
     });
