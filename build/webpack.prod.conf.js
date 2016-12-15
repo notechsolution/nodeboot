@@ -10,7 +10,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 var webpackConfigs = function (entries) {
   var views = getViews();
-  // console.log(views)
   var webpackConfigArray = [];
   Object.keys(entries).forEach(function (name) {
     var entry = {};
