@@ -4,6 +4,7 @@ var webpack = require('webpack')
 var config = require('../config/config')
 var path = require('path')
 var utils = require('./utils')
+var async = require('async')
 
 
 module.exports.package = function (app, callback) {
@@ -45,21 +46,54 @@ module.exports.package = function (app, callback) {
       callback();
     }
   } else {
-    console.log('webpackConfig:'+webpackConfig.length);
-    webpackConfig.forEach(function (webpackConfigItem){
-      console.log(JSON.stringify(webpackConfigItem));
+    // webpackConfig.forEach(function (webpackConfigItem){
+    //   console.log(JSON.stringify(webpackConfigItem));
+    //   webpack(webpackConfigItem, function (err, stats) {
+    //     // spinner.stop()
+    //     if (err) throw err
+    //     process.stdout.write(stats.toString({
+    //         colors: true,
+    //         modules: false,
+    //         children: false,
+    //         chunks: false,
+    //         chunkModules: false
+    //       }) + '\n')
+    //   });
+    // })
+
+    async.eachLimit(webpackConfig,5, function(webpackConfigItem, callback) {
+
+      // Perform operation on file here.
+      console.log('Processing entry ' + JSON.stringify(webpackConfigItem.entry));
       webpack(webpackConfigItem, function (err, stats) {
         // spinner.stop()
-        if (err) throw err
+        if (err){
+          callback(err);
+          return;
+        }
         process.stdout.write(stats.toString({
             colors: true,
             modules: false,
             children: false,
             chunks: false,
             chunkModules: false
-          }) + '\n')
+          }) + '\n');
+
+        callback();
       });
-    })
+
+    }, function(err) {
+      // if any of the file processing produced an error, err would equal that error
+      if( err ) {
+        // One of the iterations produced an error.
+        // All processing will now stop.
+        console.log('one entry failed failed to process');
+      } else {
+        console.log('All entries have been processed successfully');
+      }
+    });
+
+
   }
 
 
