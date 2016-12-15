@@ -1,11 +1,24 @@
-{{!< ../../core/views/layout}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../../core/views/partials/header') -%>
+</head>
 
-{{#contentFor 'content'}}
-<router-view></router-view>
-{{/contentFor}}
+<body>
+<section class="content">
+  <section class="container-fluid">
+    <my-header></my-header>
+    <router-view></router-view>
+    <my-footer></my-footer>
+  </section>
+</section>
+</body>
 
-{{#contentFor 'myScript'}}
-<injected-scripts/>
-{{/contentFor}}
+</html>
+
+
+
+
+
 
 

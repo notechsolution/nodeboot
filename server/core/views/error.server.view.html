@@ -1,12 +1,21 @@
-{{!< layout}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/header') -%>
+</head>
 
-{{#contentFor 'content'}}
-<component is="{{errorView}}">
-  <!-- component changes when vm.currentview changes! -->
-</component>
+<body>
+<section class="content">
+  <section class="container-fluid">
+    <my-header></my-header>
+    <component is="{{errorView}}"></component>
+    <my-footer></my-footer>
+  </section>
+</section>
+</body>
 
-{{/contentFor}}
+</html>
 
-{{#contentFor 'myScript'}}
-<injected-scripts/>
-{{/contentFor}}
+
+
+

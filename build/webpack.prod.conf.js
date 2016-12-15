@@ -15,17 +15,17 @@ var webpackConfigs = function (entries) {
     var entry = {};
     entry[name] = entries[name];
     var loaders  = utils.styleLoaders({sourceMap: config.productionSourceMap, extract: true});
-    loaders.push(
-      { test: /\.html/,
-        loader: "handlebars-loader" ,
-        query: {
-          partialDirs: [
-            path.resolve('./dist/'+config.assetsViewDirectory+'/server/core/views/partials')
-          ],
-          extensions: '.server.view.html',
-          debug:true
-        }}
-      );
+    // loaders.push(
+    //   { test: /\.html/,
+    //     loader: "handlebars-loader" ,
+    //     query: {
+    //       partialDirs: [
+    //         path.resolve('./dist/'+config.assetsViewDirectory+'/server/core/views/partials')
+    //       ],
+    //       extensions: '.server.view.html',
+    //       debug:true
+    //     }}
+    //   );
     var webpackConfig = merge(baseWebpackConfig, {
       entry: entry,
       module: {

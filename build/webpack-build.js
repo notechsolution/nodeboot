@@ -46,27 +46,13 @@ module.exports.package = function (app, callback) {
       callback();
     }
   } else {
-    // webpackConfig.forEach(function (webpackConfigItem){
-    //   console.log(JSON.stringify(webpackConfigItem));
-    //   webpack(webpackConfigItem, function (err, stats) {
-    //     // spinner.stop()
-    //     if (err) throw err
-    //     process.stdout.write(stats.toString({
-    //         colors: true,
-    //         modules: false,
-    //         children: false,
-    //         chunks: false,
-    //         chunkModules: false
-    //       }) + '\n')
-    //   });
-    // })
 
     async.eachLimit(webpackConfig,5, function(webpackConfigItem, callback) {
 
       // Perform operation on file here.
       console.log('Processing entry ' + JSON.stringify(webpackConfigItem.entry));
       webpack(webpackConfigItem, function (err, stats) {
-        
+
         if (err){
           callback(err);
           return;
@@ -131,8 +117,8 @@ var initDistFolder = function (entries) {
       if (entries[viewName]) {
         // inject the dependency js file into ejs file
         var scriptCode = '<script src="/dist/' + viewName + '.js"></script>';
-        // sed('-i',/<inject-scripts>/, scriptCode+'\r\n',viewHtmlPath);
-        sed('-i', /<injected-scripts\/>/, scriptCode + '\r\n', viewHtmlPath);
+        sed('-i',/<\/body>/, scriptCode+'<\/body>',viewHtmlPath);
+        // sed('-i', /<injected-scripts\/>/, scriptCode + '\r\n', viewHtmlPath);
       }
 
     });

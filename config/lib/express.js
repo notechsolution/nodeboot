@@ -95,9 +95,10 @@ module.exports.initMiddleware = function (app) {
  * Configure view engine
  */
 module.exports.initViewEngine = function (app) {
-  app.engine('server.view.html', hbs.express4({
-    extname: '.server.view.html'
-  }));
+  app.engine('server.view.html', require('ejs').__express);
+  // app.engine('server.view.html', hbs.express4({
+  //   extname: '.server.view.html'
+  // }));
   app.set('view engine', 'server.view.html');
   var viewPath = path.posix.join('dist', config.webpack.assetsViewDirectory)
   app.set('views', path.resolve(viewPath));
