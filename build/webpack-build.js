@@ -49,7 +49,7 @@ module.exports.package = function (app, callback) {
     webpackConfig.forEach(function (webpackConfigItem){
       console.log(JSON.stringify(webpackConfigItem));
       webpack(webpackConfigItem, function (err, stats) {
-        // spinner.stop()
+        
         if (err) throw err
         process.stdout.write(stats.toString({
             colors: true,
