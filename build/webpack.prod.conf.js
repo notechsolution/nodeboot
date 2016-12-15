@@ -15,10 +15,22 @@ var webpackConfigs = function (entries) {
   Object.keys(entries).forEach(function (name) {
     var entry = {};
     entry[name] = entries[name];
+    var loaders  = utils.styleLoaders({sourceMap: config.productionSourceMap, extract: true});
+    loaders.push(
+      { test: /\.html/,
+        loader: "handlebars-loader" ,
+        query: {
+          partialDirs: [
+            path.resolve('./dist/'+config.assetsViewDirectory+'/server/core/views/partials')
+          ],
+          extensions: '.server.view.html',
+          debug:true
+        }}
+      );
     var webpackConfig = merge(baseWebpackConfig, {
       entry: entry,
       module: {
-        loaders: utils.styleLoaders({sourceMap: config.productionSourceMap, extract: true})
+        loaders: loaders
       },
       devtool: config.productionSourceMap ? '#source-map' : false,
       output: {
@@ -54,7 +66,7 @@ var webpackConfigs = function (entries) {
           template: views[name],
           inject: true,
           minify: {
-            removeComments: true,
+            removeComments: false,
             collapseWhitespace: true,
             removeAttributeQuotes: true
             // more options:
