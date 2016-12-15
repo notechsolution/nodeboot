@@ -66,7 +66,7 @@ module.exports.package = function (app, callback) {
       // Perform operation on file here.
       console.log('Processing entry ' + JSON.stringify(webpackConfigItem.entry));
       webpack(webpackConfigItem, function (err, stats) {
-        // spinner.stop()
+        
         if (err){
           callback(err);
           return;
