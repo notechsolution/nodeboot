@@ -14,22 +14,11 @@ var webpackConfigs = function (entries) {
   Object.keys(entries).forEach(function (name) {
     var entry = {};
     entry[name] = entries[name];
-    var loaders  = utils.styleLoaders({sourceMap: config.productionSourceMap, extract: true});
-    // loaders.push(
-    //   { test: /\.html/,
-    //     loader: "handlebars-loader" ,
-    //     query: {
-    //       partialDirs: [
-    //         path.resolve('./dist/'+config.assetsViewDirectory+'/server/core/views/partials')
-    //       ],
-    //       extensions: '.server.view.html',
-    //       debug:true
-    //     }}
-    //   );
+
     var webpackConfig = merge(baseWebpackConfig, {
       entry: entry,
       module: {
-        loaders: loaders
+        loaders: utils.styleLoaders({sourceMap: config.productionSourceMap, extract: true})
       },
       devtool: config.productionSourceMap ? '#source-map' : false,
       output: {

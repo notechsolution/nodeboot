@@ -24,7 +24,11 @@ npm run unit
 npm run e2e
 
 # run all tests
-npm test
+npm testy
+
+# for production environment build & run, you may run below command, not hot-reload
+npm run prod, with smaller assets
+
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
