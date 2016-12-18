@@ -11,7 +11,7 @@ npm install
 # if your network has limitation on npm.org, you may change the npm registry to your nearby vendor. e.g.
 npm config set registry https://registry.npm.taobao.org/
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:8080, you may change the port under config/env/default.js
 npm run dev
 
 # build for production with minification
