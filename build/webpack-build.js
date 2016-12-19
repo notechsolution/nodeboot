@@ -76,6 +76,9 @@ module.exports.package = function (app, callback) {
         console.log('one entry failed failed to process');
       } else {
         console.log('All entries have been processed successfully');
+        if (callback) {
+          callback();
+        }
       }
     });
 

@@ -26,7 +26,7 @@ npm run e2e
 # run all tests
 npm testy
 
-# for production environment build & run, you may run below command, not hot-reload
+# for production environment build & run, you may run below command, not hot-reload, start at localhost:8443
 npm run prod, with smaller assets
 
 ```

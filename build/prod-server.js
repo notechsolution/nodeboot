@@ -5,9 +5,10 @@
  */
 
 process.env.NODE_ENV = 'production';
-// var app = require('../config/lib/app');
+var app = require('../config/lib/app');
 var webpack = require('./webpack-build')
 
 webpack.package(null,function(){
-  // app.start();
+  app.start();
 })
+
