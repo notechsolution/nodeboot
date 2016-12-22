@@ -10,7 +10,7 @@ module.exports = {
       subMenus : [
         {
           title: 'NodeBootJS',
-          href:'/'
+          href:'https://notechsolution.github.io/'
         },
         {
           title: 'MEANJS',
@@ -35,11 +35,11 @@ module.exports = {
       ]
     },
     {
-      title: 'User Guide',
-      roles: ['user','admin'],
+      title: 'Documentation',
+      roles: ['guest','user','admin'],
       type: 'link',
       sequence: 2,
-      href: '/#'
+      href: 'https://notechsolution.github.io/'
     }
   ]
 };
