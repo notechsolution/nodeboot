@@ -1,6 +1,7 @@
 # nodeboot.js
 
 > A boot application to faster node tech stack development
+### [Online Demo](http://notech.leezai.com/ "Online Demo")
 
 ## Build Setup
 
@@ -31,4 +32,4 @@ npm run prod, with smaller assets
 
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+For detailed explanation on how things work, checkout the [Documentation](https://notechsolution.github.io/ "Documentation")
