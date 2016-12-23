@@ -77,6 +77,8 @@ export default {
   // Please do remove them if you haven't such image
     document.body.style.paddingTop = '0';
   },
+   computed: {
+   },
 
   data(){
     return {
@@ -90,7 +92,7 @@ export default {
       this.activeModel = which;
     },
      isLogin : function(){
-      return user && user.username!='' && user.username!=null;
+      return this.user && this.user.username!='' && this.user.username!=null;
      }
   }
 }
