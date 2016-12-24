@@ -95,9 +95,12 @@
                   // success callback
                 this.active = 'login';
                 this.registerSubmit= modal_submit_register;
+                this.submitted ='';
             }, (response) => {
               console.log("signup failed due to :"+response);
               this.registerSubmit= modal_submit_register;
+              this.registerError = response && response.body.message;
+              this.submitted ='';
             });
 
             break;
@@ -115,9 +118,12 @@
           this.menuItems = response.body.menuItems;
           window.user = this.user;
           window.menuItems = this.menuItems;
+          this.submitted ='';
         }, (response) => {
             console.log('failed sign in |'+response);
             this.loginSubmit= modal_submit_login;
+            this.loginError = response && response.body.message;
+            this.submitted ='';
           });
 
             break;
