@@ -1,8 +1,10 @@
 # nodeboot.js
 
 > A boot application to faster node tech stack development
+
 ### [Online Demo](http://notech.leezai.com/ "Online Demo")
 
+#### [中文版](http://www.jianshu.com/notebooks/8586552/latest)
 ## Build Setup
 
 ``` bash
