@@ -4,7 +4,7 @@
 
 ### [Online Demo](http://notech.leezai.com/ "Online Demo")
 
-#### [中文版](http://www.jianshu.com/notebooks/8586552/latest)
+##### [中文文档](http://www.jianshu.com/notebooks/8586552/latest)
 ## Build Setup
 
 ``` bash
