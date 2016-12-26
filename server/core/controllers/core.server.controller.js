@@ -39,7 +39,7 @@ exports.renderServerError = function (req, res) {
   res.status(500).render('server/core/views/error', {
     menuItems: JSON.stringify(config.utils.getMenuItems(config,req.user)),
     title:config.app.title,
-    user:req.user,
+    user:JSON.stringify(req.user),
     errorView:'error_500'
   });
 };
@@ -53,7 +53,7 @@ exports.renderNotFound = function (req, res) {
   return res.status(400).render('server/core/views/error', {
     menuItems: JSON.stringify(config.utils.getMenuItems(config,req.user)),
     title:config.app.title,
-    user:req.user,
+    user:JSON.stringify(req.user),
     errorView:'error_400'
   });
 
