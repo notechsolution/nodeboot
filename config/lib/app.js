@@ -62,8 +62,8 @@ module.exports.start = function start(callback) {
     process.on('SIGINT', gracefulShutdown);
         graceful({
           servers: [app],
-          error: function (err) {
-            console.error('catch onuncaughtException: ' + err.stack);
+          error: function (err,throwErrorCount) {
+            console.error('Graceful catch onuncaughtException: %d times, log error here, and system will be shutdown by Graceful, error is: %s ', throwErrorCount, err.stack);
           },
           killTimeout: '30s'
         });
