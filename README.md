@@ -1,4 +1,4 @@
-# nodeboot.js
+# NodeBoot.js
 
 > A boot application to faster node tech stack development
 
@@ -7,7 +7,8 @@
 
 ## Document
 [English](https://notechsolution.github.io/)
-[中文文档](http://www.jianshu.com/notebooks/8586552/latest)
+
+[中文](http://www.jianshu.com/notebooks/8586552/latest)
 
 ## Build Setup
 
