@@ -35,6 +35,7 @@ npm run e2e
 npm testy
 
 # for production environment build & run, you may run below command, not hot-reload, start at localhost:8443
+# dummy commit
 npm run prod, with smaller assets
 
 ```
